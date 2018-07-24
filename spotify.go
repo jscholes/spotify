@@ -49,6 +49,18 @@ type Client struct {
 	AutoRetry bool
 }
 
+// NewClient creates a Spotify client which can be used to access the
+// Spotify web API.  It is only useful when you wish to pass a custom HTTP
+// client, for example if you are handling authentication elsewhere in your
+// application instead of using the provided authenticator.
+func NewClient(http *http.Client) Client {
+	return Client{
+		http:      http,
+		baseURL:   baseAddress,
+		AutoRetry: true,
+	}
+}
+
 // URI identifies an artist, album, track, or category.  For example,
 // spotify:track:6rqhFgbbKwnb9MLmUQDhG6
 type URI string
